@@ -42,6 +42,7 @@ db_pat
 
 # COMMAND ----------
 
+# DBTITLE 1,Get PAT for GitHub from Secrets
 gh_pat = dbutils.secrets.get(
   scope = secret_scope
   ,key = dbutils.widgets.get("gh_pat_secret")
@@ -117,6 +118,7 @@ dc.configure().returncode
 
 # COMMAND ----------
 
+# DBTITLE 1,Development:  Reload dabAssist
 from importlib import reload
 reload(dabAssist)
 
@@ -143,6 +145,28 @@ bundle.initialize(
 
 # DBTITLE 1,Verify the Asset Bundle's Creation
 cmd = f"ls -altR {temp_directory}"
+
+result = subprocess.run(cmd, shell=True, capture_output=True)
+print(result.stdout.decode("utf-8"))
+
+# COMMAND ----------
+
+# DBTITLE 1,Example Generate  YAML for Existing Job
+cmd = f"cd {temp_directory}/{project}; pwd; {dc.cli_path} bundle generate job --existing-job-id 533187128588928"
+
+result = subprocess.run(cmd, shell=True, capture_output=True)
+print(result.stdout.decode("utf-8"))
+
+# COMMAND ----------
+
+cmd = f"cd {temp_directory}/{project}/resources/; pwd; ls"
+
+result = subprocess.run(cmd, shell=True, capture_output=True)
+print(result.stdout.decode("utf-8"))
+
+# COMMAND ----------
+
+cmd = f"cd {temp_directory}/{project}/resources/; pwd; cat giglia_1081964970114387_synthea_data_generation.yml"
 
 result = subprocess.run(cmd, shell=True, capture_output=True)
 print(result.stdout.decode("utf-8"))
