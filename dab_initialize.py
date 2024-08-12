@@ -1,7 +1,7 @@
 # Databricks notebook source
 # DBTITLE 1,Databricks Input Widgets for Project Setup
-# Input Widgets for the Repo URL, Project Name, and Workspace URL
-dbutils.widgets.text(name = "repo_url", defaultValue="")
+# Input Widgets for the Project Name, and Workspace URL 
+# dbutils.widgets.text(name = "repo_url", defaultValue="")
 dbutils.widgets.text(name = "project", defaultValue="")
 dbutils.widgets.text(name = "workspace_url", defaultValue="")
 
@@ -12,12 +12,11 @@ dbutils.widgets.text("gh_pat_secret", "gh_pat", "DB Secret for Github PAT")
 # COMMAND ----------
 
 # DBTITLE 1,Retrieve inputs from Dataricks Widgets
-repo_url = dbutils.widgets.get(name="repo_url")
+# repo_url = dbutils.widgets.get(name="repo_url")
 project = dbutils.widgets.get(name="project")
 workspace_url = dbutils.widgets.get(name="workspace_url")
 print(
 f"""
-  repo_url = {repo_url}
   project = {project}
   workspace_url = {workspace_url}
 """
@@ -127,7 +126,7 @@ reload(dabAssist)
 # DBTITLE 1,Create a Databricks Asset Bundle object
 bundle = dabAssist.assetBundle(
   directory = temp_directory
-  ,repo_url = repo_url
+  ,repo_url = ""
   ,project = project
   ,cli_path = dc.cli_path
   ,target = "dev"
@@ -200,9 +199,3 @@ print(
     ,user_name = "M Giglia"
   )
 )
-
-# COMMAND ----------
-
-# MAGIC %environment
-# MAGIC "client": "1"
-# MAGIC "base_environment": ""
