@@ -9,6 +9,12 @@ dbutils.widgets.text(name = "workspace_url", defaultValue="")
 dbutils.widgets.text("pat_secret", "databricks_pat", "DB Secret for Databricks PAT")
 dbutils.widgets.text("gh_pat_secret", "gh_pat", "DB Secret for Github PAT")
 
+# optional: comma separated list of existing job ids to generate yaml for
+dbutils.widgets.text(name = "existing_job_ids", defaultValue="")
+
+# optional: comma separated list of existing pipeline ids to generate yaml for
+dbutils.widgets.text(name = "existing_pipeline_ids", defaultValue="")
+
 # COMMAND ----------
 
 # DBTITLE 1,Retrieve inputs from Dataricks Widgets
@@ -161,11 +167,16 @@ print(result.stdout.decode("utf-8"))
 
 # COMMAND ----------
 
-# DBTITLE 1,Example Generate  YAML for Existing Job
-cmd = f"cd {temp_directory}/{project}; pwd; {dc.cli_path} bundle generate job --existing-job-id 533187128588928"
+# DBTITLE 1,Example Generate YAMLs for Existing Jobs
+existing_job_ids = dbutils.widgets.get("existing_job_ids").split(",")
 
-result = subprocess.run(cmd, shell=True, capture_output=True)
-print(result.stdout.decode("utf-8"))
+for i in existing_job_ids:
+  print(
+    bundle.generate_yaml(
+      existing_id = i
+      ,type = "job"
+    )
+  )
 
 # COMMAND ----------
 

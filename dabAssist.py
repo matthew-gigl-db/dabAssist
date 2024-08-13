@@ -69,7 +69,7 @@ class assetBundle:
       return result.stdout.decode("utf-8") + "\n" + result.stderr.decode("utf-8")
     
     def generate_yaml(self, existing_id: str, type: str = "job"): 
-      cmd = f"cd {self.directory}; pwd; " 
+      cmd = f"cd {self.bundle_path}; pwd; " 
       if type == "job": 
         cmd += f"{self.cli_path} bundle generate job --existing-job-id {existing_id}"
       elif type == "pipeline":
