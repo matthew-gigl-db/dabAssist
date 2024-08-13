@@ -68,6 +68,17 @@ class assetBundle:
       result = subprocess.run(cmd, shell=True, capture_output=True)
       return result.stdout.decode("utf-8") + "\n" + result.stderr.decode("utf-8")
     
+    def generate_yaml(self, existing_id: str, type: str = "job"): 
+      cmd = f"cd {self.bundle_path}; pwd; " 
+      if type == "job": 
+        cmd += f"{self.cli_path} bundle generate job --existing-job-id {existing_id}"
+      elif type == "pipeline":
+        cmd += f"{self.cli_path} bundle generate pipeline --existing-pipeline-id {existing_id}"
+      else:
+        raise ValueError(f"ERROR: {type} is not a valid type.  Please use 'job' or 'pipeline'")
+      result = subprocess.run(cmd, shell=True, capture_output=True)
+      return result.stdout.decode("utf-8") + "\n" + result.stderr.decode("utf-8")
+
     def gh_install(self):
       cmd = f"curl -sS https://webi.sh/gh | sh;"
       result = subprocess.run(cmd, shell=True, capture_output=True)
@@ -121,6 +132,3 @@ class assetBundle:
       cmd = f"cd {self.bundle_path}; pwd; {self.cli_path} bundle run -t {self.target} {pipeline_flag} {key}"    
       result = subprocess.run(cmd, shell=True, capture_output=True)
       return result.stdout.decode("utf-8") + "\n" + result.stderr.decode("utf-8")
-  
-  
-
