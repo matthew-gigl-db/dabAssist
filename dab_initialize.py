@@ -69,10 +69,19 @@ print(json.dumps(json.loads(dab_init_config), indent=4))
 
 # COMMAND ----------
 
-# DBTITLE 1,Creating a Temporary Directory in Python
+# DBTITLE 1,Display the Home Directory for the User
+# MAGIC %sh
+# MAGIC
+# MAGIC cd ~; pwd;
+
+# COMMAND ----------
+
+# DBTITLE 1,Creating  a temp direcotry in the User's Home DIrectory
+from pathlib import Path
 from tempfile import TemporaryDirectory
 
-Dir = TemporaryDirectory()
+home_dir = str(Path.home())
+Dir = TemporaryDirectory(dir=home_dir)
 temp_directory = Dir.name
 
 temp_directory
@@ -126,7 +135,7 @@ reload(dabAssist)
 # DBTITLE 1,Create a Databricks Asset Bundle object
 bundle = dabAssist.assetBundle(
   directory = temp_directory
-  ,repo_url = ""
+  ,repo_url = ""  # note that repo URL is not used whhen its not known yet
   ,project = project
   ,cli_path = dc.cli_path
   ,target = "dev"
@@ -135,9 +144,11 @@ bundle = dabAssist.assetBundle(
 # COMMAND ----------
 
 # DBTITLE 1,Initialize a Databricks Asset Bundle Project with a template and config file
-bundle.initialize(
-  template = "default-python"
-  ,config_file = "dab_init_config.json"
+print(
+  bundle.initialize(
+    template = "default-python"
+    ,config_file = "dab_init_config.json"
+  )
 )
 
 # COMMAND ----------
