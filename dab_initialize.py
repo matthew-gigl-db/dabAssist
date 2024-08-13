@@ -167,30 +167,39 @@ print(result.stdout.decode("utf-8"))
 
 # COMMAND ----------
 
-# DBTITLE 1,Example Generate YAMLs for Existing Jobs
+# DBTITLE 1,Generate YAMLs for Existing Jobs
 existing_job_ids = dbutils.widgets.get("existing_job_ids").split(",")
 
-for i in existing_job_ids:
-  print(
-    bundle.generate_yaml(
-      existing_id = i
-      ,type = "job"
+if len(existing_job_ids) > 0 and existing_job_ids != ['']:
+  for i in existing_job_ids:
+    print(
+      bundle.generate_yaml(
+        existing_id = i
+        ,type = "job"
+      )
     )
-  )
 
 # COMMAND ----------
 
-cmd = f"cd {temp_directory}/{project}/resources/; pwd; ls"
+# DBTITLE 1,Generate YAMLs for Existing Pipelines
+existing_pipeline_ids = dbutils.widgets.get("existing_pipeline_ids").split(",")
 
-result = subprocess.run(cmd, shell=True, capture_output=True)
-print(result.stdout.decode("utf-8"))
+if len(existing_pipeline_ids) > 0 and existing_pipeline_ids != ['']:
+  for i in existing_pipeline_ids:
+    print(
+      bundle.generate_yaml(
+        existing_id = i
+        ,type = "pipeline"
+      )
+    )
 
 # COMMAND ----------
 
-cmd = f"cd {temp_directory}/{project}/resources/; pwd; cat giglia_1081964970114387_synthea_data_generation.yml"
+# DBTITLE 1,Demo Only
+# cmd = f"cd {temp_directory}/{project}/resources/; pwd; cat giglia_1081964970114387_synthea_data_generation.yml"
 
-result = subprocess.run(cmd, shell=True, capture_output=True)
-print(result.stdout.decode("utf-8"))
+# result = subprocess.run(cmd, shell=True, capture_output=True)
+# print(result.stdout.decode("utf-8"))
 
 # COMMAND ----------
 
