@@ -9,6 +9,7 @@ dbutils.widgets.text(name = "repo_url", defaultValue="")
 dbutils.widgets.text(name = "project", defaultValue="")
 dbutils.widgets.text(name = "workspace_url", defaultValue="")
 dbutils.widgets.text(name = "branch", defaultValue="main")
+dbutils.widgets.text(name = "job_key", defaultValue="")
 
 # Add a widget for the Databricks Secret representing the Databricks Personal Access Token  
 dbutils.widgets.text("pat_secret", "databricks_pat", "DB Secret for PAT")
@@ -20,12 +21,14 @@ repo_url = dbutils.widgets.get(name="repo_url")
 project = dbutils.widgets.get(name="project")
 workspace_url = dbutils.widgets.get(name="workspace_url")
 branch = dbutils.widgets.get(name="branch")
+job_key = dbutils.widgets.get(name="job_key")
 print(
 f"""
   repo_url = {repo_url}
   project = {project}
   workspace_url = {workspace_url}
   branch = {branch}
+  job_key = {job_key}
 """
 )
 
@@ -145,7 +148,7 @@ print(
 # DBTITLE 1,Run a Job Or Pipeline Based on the Key
 print(
   bundle.run(
-    key = "unity_catalog_setup_job"
+    key = job_key
   )
 )
 
