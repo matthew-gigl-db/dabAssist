@@ -90,8 +90,12 @@ class assetBundle:
       return result.stdout.decode("utf-8") + "\n" + result.stderr.decode("utf-8")
     
     #  git add .; git commit -m 'initial commit';
-    def gh_repo(self, user_email: str, user_name: str, gh_path: str = "~/.local/bin/gh"):
-      cmd = f"cd {self.directory}/{self.project}; pwd; git init; git config user.email '{user_email}'; git config user.name '{user_name}'; git add *; git commit -m 'initial commit'; git branch -M main; {gh_path} repo create {self.project} --private --source={self.directory}/{self.project} --remote=upstream --push;"
+    def gh_repo(self, user_email: str, user_name: str, gh_path: str = "~/.local/bin/gh", private: bool = False):
+      cmd = f"cd {self.directory}/{self.project}; pwd; git init; git config user.email '{user_email}'; git config user.name '{user_name}'; git add *; git commit -m 'initial commit'; git branch -M main; {gh_path} repo create {self.project} --source={self.directory}/{self.project} --remote=upstream --push"
+      if private:
+        cmd += " --private;"
+      else:
+        cmd += " --public;"
       result = subprocess.run(cmd, shell=True, capture_output=True)
       return result.stdout.decode("utf-8") + "\n" + result.stderr.decode("utf-8")
 

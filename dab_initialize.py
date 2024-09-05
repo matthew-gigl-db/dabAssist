@@ -141,7 +141,7 @@ reload(dabAssist)
 # DBTITLE 1,Create a Databricks Asset Bundle object
 bundle = dabAssist.assetBundle(
   directory = temp_directory
-  ,repo_url = ""  # note that repo URL is not used whhen its not known yet
+  ,repo_url = ""  # note that repo URL is not used when its not known yet
   ,project = project
   ,cli_path = dc.cli_path
   ,target = "dev"
@@ -195,6 +195,13 @@ if len(existing_pipeline_ids) > 0 and existing_pipeline_ids != ['']:
 
 # COMMAND ----------
 
+cmd = f"ls -altR {temp_directory}"
+
+result = subprocess.run(cmd, shell=True, capture_output=True)
+print(result.stdout.decode("utf-8"))
+
+# COMMAND ----------
+
 # DBTITLE 1,Demo Only
 # cmd = f"cd {temp_directory}/{project}/resources/; pwd; cat giglia_1081964970114387_synthea_data_generation.yml"
 
@@ -228,5 +235,6 @@ print(
   bundle.gh_repo(
     user_email = "matthew.giglia@databricks.com"
     ,user_name = "M Giglia"
+    ,private = True
   )
 )
