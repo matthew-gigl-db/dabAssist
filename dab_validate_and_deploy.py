@@ -131,6 +131,16 @@ print(
 
 # COMMAND ----------
 
+# MAGIC %md
+# MAGIC ***
+# MAGIC
+# MAGIC ### While Developing, iterate over: 
+# MAGIC - Validate
+# MAGIC - Deploy
+# MAGIC - Run 
+
+# COMMAND ----------
+
 # DBTITLE 1,Validate the Bundle's YAMLs and Set Up
 print(
   bundle.validate()
@@ -161,6 +171,11 @@ print(
 #     ,pipeline_flag = "--validate-only"
 #   )
 # )
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC ***
 
 # COMMAND ----------
 

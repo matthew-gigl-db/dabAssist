@@ -136,3 +136,6 @@ class assetBundle:
       cmd = f"cd {self.bundle_path}; pwd; {self.cli_path} bundle run -t {self.target} {pipeline_flag} {key}"    
       result = subprocess.run(cmd, shell=True, capture_output=True)
       return result.stdout.decode("utf-8") + "\n" + result.stderr.decode("utf-8")
+    
+
+
