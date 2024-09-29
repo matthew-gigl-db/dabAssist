@@ -174,7 +174,7 @@ if len(existing_job_ids) > 0 and existing_job_ids != ['']:
   for i in existing_job_ids:
     print(
       bundle.generate_yaml(
-        existing_id = i
+        existing_id = i.strip()
         ,type = "job"
       )
     )
@@ -188,7 +188,7 @@ if len(existing_pipeline_ids) > 0 and existing_pipeline_ids != ['']:
   for i in existing_pipeline_ids:
     print(
       bundle.generate_yaml(
-        existing_id = i
+        existing_id = i.strip()
         ,type = "pipeline"
       )
     )
@@ -203,10 +203,10 @@ print(result.stdout.decode("utf-8"))
 # COMMAND ----------
 
 # DBTITLE 1,Demo Only
-cmd = f"cd {temp_directory}/{project}/resources/; pwd; cat giglia_1081964970114387_synthea_data_generation.yml"
+# cmd = f"cd {temp_directory}/{project}/resources/; pwd; cat giglia_1081964970114387_synthea_data_generation.yml"
 
-result = subprocess.run(cmd, shell=True, capture_output=True)
-print(result.stdout.decode("utf-8"))
+# result = subprocess.run(cmd, shell=True, capture_output=True)
+# print(result.stdout.decode("utf-8"))
 
 # COMMAND ----------
 
