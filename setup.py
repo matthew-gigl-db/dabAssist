@@ -3,8 +3,9 @@ from setuptools import setup, find_packages
 setup(
     name='dabAssist',
     version='0.1',
-    packages=find_packages(include=['dabAssist', 'dabAssist.*']),
+    packages=find_packages(include=['dabAssist']),
     install_requires=[
         # List your package dependencies here
+        # subprocess and tempfile are required
     ],
 )
