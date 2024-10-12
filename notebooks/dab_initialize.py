@@ -109,7 +109,20 @@ result.stdout.decode("utf-8")
 # COMMAND ----------
 
 # DBTITLE 1,Import the dabAssist classes
-import dabAssist
+import sys
+from pathlib import Path
+
+# Add the parent directory to sys.path
+parent_dir = str(Path("../dabAssist/dabAssist.py").resolve().parent)
+if parent_dir not in sys.path:
+    sys.path.append(parent_dir)
+
+# Now you can import dabAssist
+# import dabAssist
+
+# COMMAND ----------
+
+from dabAssist import dabAssist
 
 # COMMAND ----------
 
