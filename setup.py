@@ -6,9 +6,5 @@ setup(
     packages=find_packages(),
     install_requires=[
         # List your package dependencies here
-        "subprocess"
-        ,"tempfile"
-        ,"json"
-        ,"pathlib"
     ],
 )
