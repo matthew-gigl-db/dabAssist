@@ -203,10 +203,10 @@ print(result.stdout.decode("utf-8"))
 # COMMAND ----------
 
 # DBTITLE 1,Demo Only
-# cmd = f"cd {temp_directory}/{project}/resources/; pwd; cat giglia_1081964970114387_synthea_data_generation.yml"
+cmd = f"cd {temp_directory}/{project}/resources/; pwd; cat giglia_1081964970114387_synthea_data_generation.yml"
 
-# result = subprocess.run(cmd, shell=True, capture_output=True)
-# print(result.stdout.decode("utf-8"))
+result = subprocess.run(cmd, shell=True, capture_output=True)
+print(result.stdout.decode("utf-8"))
 
 # COMMAND ----------
 
@@ -235,6 +235,6 @@ print(
   bundle.gh_repo(
     user_email = "matthew.giglia@databricks.com"
     ,user_name = "M Giglia"
-    ,private = True
+    ,private = False
   )
 )
