@@ -7,7 +7,7 @@
 # Input Widgets for the Repo URL, Project Name, and Workspace URL
 dbutils.widgets.text(name = "repo_url", defaultValue="")
 dbutils.widgets.text(name = "project", defaultValue="")
-dbutils.widgets.text(name = "workspace_url", defaultValue="")
+dbutils.widgets.text(name = "workspace_url", defaultValue="https://" + spark.conf.get("spark.databricks.workspaceUrl"))
 dbutils.widgets.text(name = "branch", defaultValue="main")
 dbutils.widgets.text(name = "job_key", defaultValue="")
 
@@ -113,7 +113,7 @@ bundle = dabAssist.assetBundle(
   ,repo_url = repo_url
   ,project = project
   ,cli_path = dc.cli_path
-  ,target = "dev"
+  ,target = "dev_azure"
 )
 
 # COMMAND ----------
@@ -167,6 +167,7 @@ print(
 print(
   bundle.run(
     key = job_key
+    ,pipeline_flag= "--refresh-all"
   )
 )
 
